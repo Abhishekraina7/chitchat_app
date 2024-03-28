@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:chitchat_02/constants.dart';
 import 'package:chitchat_02/components/buttons.dart';
+import 'package:chitchat_02/Contollers/auth.dart';
+import 'package:chitchat_02/screens/chat_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'loginScreen';
@@ -11,6 +13,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class LoginScreenState extends State<LoginScreen> {
+
+  late String email;
+  late String password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +50,7 @@ class LoginScreenState extends State<LoginScreen> {
             ),
             TextField(
               onChanged: (value) {
-                //Do something with the user input.
+                email = value;
               },
               decoration: kMessageTextFieldDecoration.copyWith(hintText: 'Enter your email'),
             ),
@@ -54,13 +60,42 @@ class LoginScreenState extends State<LoginScreen> {
             TextField(
               onChanged: (value) {
                 //Do something with the user input.
+                password = value;
               },
               decoration: kMessageTextFieldDecoration.copyWith(hintText: 'Enter your Password'),
             ),
             const SizedBox(
               height: 24.0,
             ),
-            Buttons(color: const Color(0xFF95FF80), name: 'Log in', onPressed: (){},),
+            Buttons(color: const Color(0xFF95FF80), name: 'Log in',
+              onPressed: (){
+                Navigator.pushNamed(context, ChatScreen.id);
+                loginUser(email, password).then((value) {
+                  {
+                    if(value == "success"){
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(
+                        content: const Text(
+                          "Login Successfull",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        backgroundColor: Colors.green.shade400,
+                      ));
+
+                    }
+                    else{
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(
+                        content: Text(
+                          value,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                        backgroundColor: Colors.red.shade400,
+                      ));
+                    }
+                  }
+                });
+              },),
 
           ],
         ),
