@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:chitchat_02/constants.dart';
 import 'package:chitchat_02/components/buttons.dart';
@@ -69,7 +70,6 @@ class LoginScreenState extends State<LoginScreen> {
             ),
             Buttons(color: const Color(0xFF95FF80), name: 'Log in',
               onPressed: (){
-                Navigator.pushNamed(context, ChatScreen.id);
                 loginUser(email, password).then((value) {
                   {
                     if(value == "success"){
@@ -81,7 +81,7 @@ class LoginScreenState extends State<LoginScreen> {
                         ),
                         backgroundColor: Colors.green.shade400,
                       ));
-
+                      Navigator.pushReplacementNamed(context, ChatScreen.id);
                     }
                     else{
                       ScaffoldMessenger.of(context)
