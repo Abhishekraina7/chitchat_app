@@ -1,12 +1,11 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:chitchat_02/constants.dart';
 import 'package:chitchat_02/screens/registration_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 
 class ChatScreen extends StatefulWidget {
-  static const String id = 'welcomeScreen';
+  static const String id = 'ChatScreen';
 
   const ChatScreen({super.key});
 
@@ -15,28 +14,6 @@ class ChatScreen extends StatefulWidget {
 }
 
 class ChatScreenState extends State<ChatScreen> {
-  final _auth = FirebaseAuth.instance;
-  User? loggedInUser;
-  void initState()
-  {
-    super.initState();
-    getCurrentUser();
-  }
-
-  Future<void> getCurrentUser() async
-  {
-    try {
-      User? user = await _auth.currentUser;
-      if (user != null) {
-        loggedInUser = user;
-        debugPrint(loggedInUser?.email);
-      }
-    }
-    catch(e)
-    {
-      debugPrint(e as String?);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
