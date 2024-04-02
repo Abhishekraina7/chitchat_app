@@ -1,6 +1,9 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:chitchat_02/screens/welcome_screen.dart';
+import 'package:chitchat_02/screens/chat_screen.dart';
 
 // The following client object is responsible for establishing a connection with the appwrite server
 
@@ -24,6 +27,38 @@ Future checkSessions() async{
     return false;
   }
 
+}
+// The widget below checks weather the user is logged in or not and direct accordingly to specific screens
+
+class CheckSession extends StatefulWidget {
+
+  static const String id = 'CheckSession';
+  const CheckSession({super.key});
+
+  @override
+  State<CheckSession> createState() => _CheckSessionState();
+}
+
+class _CheckSessionState extends State<CheckSession> {
+  @override
+  void initState() {
+    checkSessions().then((value) => {
+      if(value){
+        Navigator.pushReplacementNamed(context, ChatScreen.id),
+      }
+      else{
+        Navigator.restorablePopAndPushNamed(context, WelcomeScreen.id),
+      }
+    });
+
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(child: CircularProgressIndicator()),
+    );
+  }
 }
 
 
