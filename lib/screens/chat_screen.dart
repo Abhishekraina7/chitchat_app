@@ -1,8 +1,9 @@
 
+import 'package:chitchat_02/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:chitchat_02/constants.dart';
-import 'package:chitchat_02/screens/registration_screen.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:chitchat_02/Contollers/checkSession.dart';
+
 
 class ChatScreen extends StatefulWidget {
   static const String id = 'ChatScreen';
@@ -60,8 +61,27 @@ class ChatScreenState extends State<ChatScreen> {
                 ],
               ),
             ),
+             Column(
+              children: <Widget>[
+                Container(
+                 child: FloatingActionButton(
+                     onPressed: ()
+                     {
+                   // add the logout session function call here
+                       logout();
+                       Navigator.pushReplacementNamed(context, WelcomeScreen.id);
+                 },
+                   backgroundColor: Colors.lightBlue,
+
+                 child:  const Text('Logout', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                 ),
+               ),
+              ],
+            ),
           ],
+
         ),
+
       ),
     );
   }
