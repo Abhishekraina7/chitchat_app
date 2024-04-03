@@ -1,6 +1,4 @@
 import 'package:appwrite/appwrite.dart';
-import 'package:appwrite/models.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:chitchat_02/screens/welcome_screen.dart';
 import 'package:chitchat_02/screens/chat_screen.dart';
@@ -61,4 +59,11 @@ class _CheckSessionState extends State<CheckSession> {
   }
 }
 
+
+// Logout
+
+Future logout() async{
+
+  await account.deleteSession(sessionId: "current");
+}
 
