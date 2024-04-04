@@ -16,7 +16,7 @@ Client client = Client()
     Account account = Account(client);
 
 
-    //create a new user using email
+    //create a new user using email (Sign up)
 
 Future<String> createUser(String name, String email, String password)
 async
