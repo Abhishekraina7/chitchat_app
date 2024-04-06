@@ -27,15 +27,19 @@ class ChatScreenState extends State<ChatScreen> {
           IconButton(
               icon: const Icon(Icons.close),
               onPressed: () {
-                //Implement logout functionality
-              }),
+                realtimeupdates();
+                realtimewebsocket();
+                // logout();
+                // Navigator.pushReplacementNamed(context, WelcomeScreen.id);
+                },
+              ),
         ],
         title: const Text('⚡️Chat'),
         backgroundColor: Colors.lightBlueAccent,
       ),
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
@@ -57,31 +61,12 @@ class ChatScreenState extends State<ChatScreen> {
                       createdocument(message);
                       // Figure out how to send the data to the Appwrite database and retrieve from it and send to the other user
                     },
-                    child: const Text(
-                      'Send',
-                      style: kSendButtonTextStyle,
-                    ),
+                    child: const Icon(Icons.send, color: Colors.lightBlue),
                   ),
                 ],
               ),
             ),
-             Row(
-              children: <Widget>[
-                Container(
-                 child: FloatingActionButton(
-                     onPressed: ()
-                     {
-                   // add the logout session function call here
-                       logout();
-                       Navigator.pushReplacementNamed(context, WelcomeScreen.id);
-                 },
-                   backgroundColor: Colors.lightBlue,
 
-                 child:  const Text('Logout', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-                 ),
-               ),
-              ],
-            ),
           ],
 
         ),
