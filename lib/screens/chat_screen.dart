@@ -5,6 +5,7 @@ import 'package:chitchat_02/constants.dart';
 import 'package:chitchat_02/Contollers/checkSession.dart';
 
 
+
 class ChatScreen extends StatefulWidget {
   static const String id = 'ChatScreen';
 
@@ -16,7 +17,8 @@ class ChatScreen extends StatefulWidget {
 
 class ChatScreenState extends State<ChatScreen> {
 
-  @override
+  late String message;
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -44,14 +46,16 @@ class ChatScreenState extends State<ChatScreen> {
                   Expanded(
                     child: TextField(
                       onChanged: (value) {
-                        //Do something with the user input.
+                        message = value;
                       },
                       decoration: kMessageTextFieldDecoration,
                     ),
                   ),
                   TextButton(
                     onPressed: () {
-                      //Implement send functionality.
+                      //TODO: Appwrite database implement karro
+                      createdocument(message);
+                      // Figure out how to send the data to the Appwrite database and retrieve from it and send to the other user
                     },
                     child: const Text(
                       'Send',
@@ -61,7 +65,7 @@ class ChatScreenState extends State<ChatScreen> {
                 ],
               ),
             ),
-             Column(
+             Row(
               children: <Widget>[
                 Container(
                  child: FloatingActionButton(
