@@ -19,6 +19,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   animated_text_kit: ^4.2.2
   appwrite: ^12.0.1
+  web_socket_channel: ^2.2.0
 #  firebase_core: ^2.27.2
 #  cloud_firestore: ^4.15.10
 #  firebase_auth: ^4.18.0
