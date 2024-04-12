@@ -1,13 +1,15 @@
-
-import 'package:chitchat_02/screens/welcome_screen.dart';
+import 'package:chitchat_02/Contollers/message_provider.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:chitchat_02/constants.dart';
 import 'package:chitchat_02/Contollers/checkSession.dart';
+import 'package:provider/provider.dart';
 
 
 
 class ChatScreen extends StatefulWidget {
   static const String id = 'ChatScreen';
+
 
   const ChatScreen({super.key});
 
@@ -18,6 +20,8 @@ class ChatScreen extends StatefulWidget {
 class ChatScreenState extends State<ChatScreen> {
 
   late String message;
+  final fieldValueStreamController = StreamController<String>();
+
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,8 +31,8 @@ class ChatScreenState extends State<ChatScreen> {
           IconButton(
               icon: const Icon(Icons.close),
               onPressed: () {
-                realtimeupdates();
-                realtimewebsocket();
+                // realtimeupdates();
+                // realtimewebsocket();
                 // logout();
                 // Navigator.pushReplacementNamed(context, WelcomeScreen.id);
                 },
@@ -39,9 +43,20 @@ class ChatScreenState extends State<ChatScreen> {
       ),
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+             Expanded(
+              child: ListView.builder( // Use ListView.builder
+                reverse: false, // Display messages in reverse chronological order
+                itemCount: Provider.of<MessageProvider>(context).messages.length,
+                itemBuilder: (context, index) {
+                  final message = Provider.of<MessageProvider>(context).messages[index];
+                  return Text(message); // Render each message as a Text widget
+                },
+              ),
+            ),
+
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
@@ -57,9 +72,7 @@ class ChatScreenState extends State<ChatScreen> {
                   ),
                   TextButton(
                     onPressed: () {
-                      //TODO: Appwrite database implement karro
                       createdocument(message);
-                      // Figure out how to send the data to the Appwrite database and retrieve from it and send to the other user
                     },
                     child: const Icon(Icons.send, color: Colors.lightBlue),
                   ),
