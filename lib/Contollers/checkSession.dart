@@ -1,9 +1,12 @@
 
+import 'dart:async';
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 import 'package:chitchat_02/screens/welcome_screen.dart';
 import 'package:chitchat_02/screens/chat_screen.dart';
 import 'package:web_socket_channel/io.dart';
+import 'package:flutter/foundation.dart';
+
 
 // The following client object is responsible for establishing a connection with the appwrite server
 
@@ -93,7 +96,7 @@ Future<void> createdocument(String message) async{
 
 // Following function is used to get all the documents (messages) from the database collection
 
-  Future<void> getdocument() async
+Future<void> getdocument() async
 
   {
     try {
@@ -120,41 +123,13 @@ Future<void> createdocument(String message) async{
 
 // This Realtime object is used to access the realtime updated from the appwrite database
 
-  final realtime = Realtime(client);
-
-  Future<void> realtimeupdates() async
-  {
-
-    try{
-      var subscription = await realtime.subscribe(
-          [
-            'databases.$databaseId.collections.$collectionId.documents'
-          ]);
-      // Listen for updates and print them
-      subscription.stream.listen((response) {
-        // how to print the specific field here?
-        var fieldValue = response.payload['Message']; // Replace 'fieldName' with the actual field name
-        print('Field value: $fieldValue');
-      });
-    }
-    on AppwriteException catch(e)
-    {
-      print(e);
-    }
-
-  }
-
 
   // wss://cloud.appwrite.io/v1/realtime?project=6603843572662569be9e&channels%5B%5D=databases.66065cf55547546538d9.collections.66065d65702be24e26aa.documents
-
 // Following is a Websocket which is used to listein to the realtime changes
-
-
 
 void realtimewebsocket() {
   // WebSocket URL
-  const url = 'wss://cloud.appwrite.io/v1/realtime?project=6603843572662569be9e&channels%5B%5D=databases.66065cf55547546538d9.collections.66065d65702be24e26aa.documents';
-
+  var url = 'wss://cloud.appwrite.io/v1/realtime?project=6603843572662569be9e&channels%5B%5D=databases.66065cf55547546538d9.collections.66065d65702be24e26aa.documents';
   // Create a WebSocket channel
   final channel = IOWebSocketChannel.connect(url);
 
@@ -174,4 +149,30 @@ void realtimewebsocket() {
     },
   );
 }
+
+
+
+
+// class RealtimeConnection extends StatefulWidget {
+//   const RealtimeConnection({super.key});
+//
+//   @override
+//   State<RealtimeConnection> createState() => _RealtimeConnectionState();
+// }
+//
+// class _RealtimeConnectionState extends State<RealtimeConnection> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return ListView.builder(
+//       reverse: true, // Display messages in reverse chronological order
+//       itemCount: _messages.length,
+//       itemBuilder: (context, index) {
+//         final message = _messages[index];
+//         return Text(message); // Render each message as a Text widget
+//       },
+//     );
+//
+//   }
+// }
+
 
