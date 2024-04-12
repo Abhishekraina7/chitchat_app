@@ -5,6 +5,9 @@ import 'package:chitchat_02/screens/login_screen.dart';
 import 'package:chitchat_02/screens/registration_screen.dart';
 import 'package:chitchat_02/screens/chat_screen.dart';
 import 'package:chitchat_02/Contollers/checkSession.dart';
+import 'package:provider/provider.dart';
+
+import 'Contollers/message_provider.dart';
 
 void main() {
 
@@ -26,7 +29,10 @@ class chitchat_02 extends StatelessWidget {
       // home: const WelcomeScreen(), // anyscreen in home open first when the app is started
       initialRoute: CheckSession.id, // similar to home.
       routes: {
-        ChatScreen.id:(context) =>  const ChatScreen(),
+        ChatScreen.id:(context) =>  ChangeNotifierProvider<MessageProvider>(
+          create: (context) => MessageProvider(),
+          child: ChatScreen(),
+        ),
         LoginScreen.id:(context) =>  const LoginScreen(),
         RegistrationScreen.id:(context) =>  const RegistrationScreen(),
         WelcomeScreen.id:(context) =>  const WelcomeScreen(),
