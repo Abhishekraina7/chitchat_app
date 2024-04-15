@@ -77,10 +77,12 @@ Future logout() async{
 const databaseId = '66065cf55547546538d9';
 const collectionId = '66065d65702be24e26aa';
 // This function helps in accessing the appwrite database
+
+
+
 final databases = Databases(client);
-
-
 // Following function helps in performing create document functionality in the appwrite database
+
 Future<void> createdocument(String message) async{
   try {
     await databases.createDocument(
@@ -121,11 +123,9 @@ Future<void> getdocument() async
     }
   }
 
-// This Realtime object is used to access the realtime updated from the appwrite database
 
-
-  // wss://cloud.appwrite.io/v1/realtime?project=6603843572662569be9e&channels%5B%5D=databases.66065cf55547546538d9.collections.66065d65702be24e26aa.documents
 // Following is a Websocket which is used to listein to the realtime changes
+
 
 void realtimewebsocket() {
   // WebSocket URL
@@ -151,28 +151,5 @@ void realtimewebsocket() {
 }
 
 
-
-
-// class RealtimeConnection extends StatefulWidget {
-//   const RealtimeConnection({super.key});
-//
-//   @override
-//   State<RealtimeConnection> createState() => _RealtimeConnectionState();
-// }
-//
-// class _RealtimeConnectionState extends State<RealtimeConnection> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return ListView.builder(
-//       reverse: true, // Display messages in reverse chronological order
-//       itemCount: _messages.length,
-//       itemBuilder: (context, index) {
-//         final message = _messages[index];
-//         return Text(message); // Render each message as a Text widget
-//       },
-//     );
-//
-//   }
-// }
 
 
