@@ -1,11 +1,12 @@
 
 import 'dart:async';
+import 'package:chitchat_02/Contollers/message_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:chitchat_02/constants.dart';
 import 'package:chitchat_02/Contollers/checkSession.dart';
-import 'package:provider/provider.dart';
 import 'package:chitchat_02/screens/welcome_screen.dart';
 import 'package:chitchat_02/Contollers/Scrollable_listview.dart';
+import 'package:provider/provider.dart';
 
 
 
@@ -35,7 +36,6 @@ class ChatScreenState extends State<ChatScreen> {
           IconButton(
               icon: const Icon(Icons.close),
               onPressed: () {
-
                 logout();
                 Navigator.pushReplacementNamed(context, WelcomeScreen.id);
                 },
@@ -49,7 +49,8 @@ class ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            const Expanded(child: MessageBubble()),
+              const Expanded(child:
+              MessageBubble()),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
