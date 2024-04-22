@@ -38,11 +38,13 @@ class LoginScreenState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Center(
-              child: Hero(
-                tag: 'logo',
-                child: Container(
-                  height: 170.0,
-                  child: Image.asset('images/loginscreenback.png'),
+              child: Flexible(
+                child: Hero(
+                  tag: 'logo',
+                  child: Container(
+                    height: 170.0,
+                    child: Image.asset('images/loginscreenback.png'),
+                  ),
                 ),
               ),
             ),
@@ -103,19 +105,4 @@ class LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-// Padding(
-// padding: const EdgeInsets.symmetric(vertical: 16.0),
-// child: Material(
-// color: const Color(0xFF95FF80),
-// borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-// elevation: 5.0,
-// child: MaterialButton(
-// onPressed: () {
-// //Implement login functionality.
-// },
-// minWidth: 200.0,
-// height: 35.0,
-// child:  const SingleChildScrollView(child: Text('Log In',)),
-// ),
-// ),
-// ),
+
