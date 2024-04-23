@@ -18,11 +18,11 @@ Client client = Client()
 
     //create a new user using email (Sign up)
 
-Future<String> createUser(String name, String email, String password)
+Future<String> createUser(String email, String password)
 async
 {
   try{
-    await account.create(userId: ID.unique(), email: email, password: password,name: name);
+    await account.create(userId: ID.unique(), email: email, password: password);
     return "success";
      }
    on AppwriteException catch(e)
