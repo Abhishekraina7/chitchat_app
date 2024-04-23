@@ -3,10 +3,10 @@ import 'package:chitchat_02/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:chitchat_02/components/buttons.dart';
 import 'package:chitchat_02/Contollers/auth.dart';
-import 'package:chitchat_02/screens/chat_screen.dart';
-import 'package:appwrite/appwrite.dart';
+import 'package:chitchat_02/Contollers/user_data.dart';
+import 'package:provider/provider.dart';
 
-
+ // Global name variable
 
 class RegistrationScreen extends StatefulWidget {
   static const String id = 'registration';
@@ -17,11 +17,10 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class RegistrationScreenState extends State<RegistrationScreen> {
-
+   // local variables
    late String email;
    late String password;
    late String name;
-
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +53,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
               onChanged: (value) {
                 //Do something with the user input.
                 name = value;
+                Provider.of<Userdata>(context).setName(value);
               },
               decoration:kMessageTextFieldDecoration.copyWith(hintText: 'Enter your name'),
             ),
@@ -81,10 +81,11 @@ class RegistrationScreenState extends State<RegistrationScreen> {
             ),
             Buttons(color: const Color(0xFF95FF80), name: 'Register',
                 onPressed: (){
-                  createUser(name, email,password)
-                      .then((value){
-                        if(value == "success"){
-                          ScaffoldMessenger.of(context)
+                  createUser(email,password).then((value)
+                  {
+                    if(value == "success")
+                  {
+                    ScaffoldMessenger.of(context)
                               .showSnackBar(SnackBar(
                             content: const Text(
                               "Account Created Successfully",
